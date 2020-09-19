@@ -11,7 +11,8 @@ namespace YourAmongusSpecialSpy
     public static class Amongus
     {
         private static Process GetProcess()
-            => Process.GetProcessesByName("Among Us").FirstOrDefault();
+            => Process.GetProcessesByName("Among Us")
+                .FirstOrDefault(x => x.MainWindowTitle == "Among Us");
 
         public static Bitmap GetImage()
             => GetProcess()?.CaptureWindow();
