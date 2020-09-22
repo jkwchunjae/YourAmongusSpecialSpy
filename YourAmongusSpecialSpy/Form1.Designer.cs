@@ -31,9 +31,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Start = new System.Windows.Forms.Button();
             this.Stop = new System.Windows.Forms.Button();
-            this.Run = new System.Windows.Forms.Button();
             this.Capture = new System.Windows.Forms.Button();
             this.ImageTrackBar = new System.Windows.Forms.TrackBar();
+            this.GifStart = new System.Windows.Forms.Button();
+            this.GifEnd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageTrackBar)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +54,7 @@
             // 
             this.Start.Location = new System.Drawing.Point(12, 12);
             this.Start.Name = "Start";
-            this.Start.Size = new System.Drawing.Size(75, 23);
+            this.Start.Size = new System.Drawing.Size(50, 23);
             this.Start.TabIndex = 1;
             this.Start.Text = "Start";
             this.Start.UseVisualStyleBackColor = true;
@@ -61,27 +62,17 @@
             // 
             // Stop
             // 
-            this.Stop.Location = new System.Drawing.Point(94, 13);
+            this.Stop.Location = new System.Drawing.Point(68, 13);
             this.Stop.Name = "Stop";
-            this.Stop.Size = new System.Drawing.Size(75, 23);
+            this.Stop.Size = new System.Drawing.Size(50, 23);
             this.Stop.TabIndex = 2;
             this.Stop.Text = "Stop";
             this.Stop.UseVisualStyleBackColor = true;
             this.Stop.Click += new System.EventHandler(this.Stop_Click);
             // 
-            // Run
-            // 
-            this.Run.Location = new System.Drawing.Point(176, 13);
-            this.Run.Name = "Run";
-            this.Run.Size = new System.Drawing.Size(75, 23);
-            this.Run.TabIndex = 3;
-            this.Run.Text = "Run";
-            this.Run.UseVisualStyleBackColor = true;
-            this.Run.Click += new System.EventHandler(this.Run_Click);
-            // 
             // Capture
             // 
-            this.Capture.Location = new System.Drawing.Point(312, 11);
+            this.Capture.Location = new System.Drawing.Point(169, 12);
             this.Capture.Name = "Capture";
             this.Capture.Size = new System.Drawing.Size(75, 23);
             this.Capture.TabIndex = 4;
@@ -97,14 +88,35 @@
             this.ImageTrackBar.TabIndex = 5;
             this.ImageTrackBar.Scroll += new System.EventHandler(this.ImageTrackBar_Scroll);
             // 
+            // GifStart
+            // 
+            this.GifStart.Location = new System.Drawing.Point(294, 12);
+            this.GifStart.Name = "GifStart";
+            this.GifStart.Size = new System.Drawing.Size(68, 23);
+            this.GifStart.TabIndex = 6;
+            this.GifStart.Text = "Gif Start";
+            this.GifStart.UseVisualStyleBackColor = true;
+            this.GifStart.Click += new System.EventHandler(this.GifStart_Click);
+            // 
+            // GifEnd
+            // 
+            this.GifEnd.Location = new System.Drawing.Point(375, 12);
+            this.GifEnd.Name = "GifEnd";
+            this.GifEnd.Size = new System.Drawing.Size(68, 23);
+            this.GifEnd.TabIndex = 7;
+            this.GifEnd.Text = "Gif End";
+            this.GifEnd.UseVisualStyleBackColor = true;
+            this.GifEnd.Click += new System.EventHandler(this.GifEnd_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(652, 482);
+            this.Controls.Add(this.GifEnd);
+            this.Controls.Add(this.GifStart);
             this.Controls.Add(this.ImageTrackBar);
             this.Controls.Add(this.Capture);
-            this.Controls.Add(this.Run);
             this.Controls.Add(this.Stop);
             this.Controls.Add(this.Start);
             this.Controls.Add(this.pictureBox1);
@@ -122,9 +134,10 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button Start;
         private System.Windows.Forms.Button Stop;
-        private System.Windows.Forms.Button Run;
         private System.Windows.Forms.Button Capture;
         private System.Windows.Forms.TrackBar ImageTrackBar;
+        private System.Windows.Forms.Button GifStart;
+        private System.Windows.Forms.Button GifEnd;
     }
 }
 

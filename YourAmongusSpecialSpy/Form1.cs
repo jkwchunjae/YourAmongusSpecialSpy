@@ -19,6 +19,7 @@ namespace YourAmongusSpecialSpy
         private delegate void ResizeFormDelegate(int width, int height);
         AmongusRecorder _recorder;
         List<RecordData> _prevAmongusImage;
+        GifManager _gifManager;
 
         public Form1()
         {
@@ -32,7 +33,6 @@ namespace YourAmongusSpecialSpy
             };
 
             Stop_Click(null, null);
-            Run.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -71,6 +71,17 @@ namespace YourAmongusSpecialSpy
             }
             catch
             { }
+        }
+
+        private void GifStart_Click(object sender, EventArgs e)
+        {
+            _gifManager = new GifManager();
+            _gifManager.Init(_prevAmongusImage, ImageTrackBar.Value);
+        }
+
+        private void GifEnd_Click(object sender, EventArgs e)
+        {
+            _gifManager?.Complete(ImageTrackBar.Value);
         }
     }
 }
