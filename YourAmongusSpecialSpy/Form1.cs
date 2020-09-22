@@ -39,7 +39,7 @@ namespace YourAmongusSpecialSpy
         {
             Start.Enabled = false;
             Stop.Enabled = true;
-            _recorder.Start(TimeSpan.FromMilliseconds(150));
+            _recorder.Start(TimeSpan.FromMilliseconds(100));
         }
 
         private void Stop_Click(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace YourAmongusSpecialSpy
 
         private void Capture_Click(object sender, EventArgs e)
         {
-            var dir = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads\\amongus-cpatures"));
+            var dir = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads\\amongus-captures"));
             if (!dir.Exists)
                 Directory.CreateDirectory(dir.FullName);
 
