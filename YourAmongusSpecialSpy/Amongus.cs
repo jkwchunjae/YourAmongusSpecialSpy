@@ -14,8 +14,38 @@ namespace YourAmongusSpecialSpy
             => Process.GetProcessesByName("Among Us")
                 .FirstOrDefault(x => x.MainWindowTitle == "Among Us");
 
-        public static Bitmap GetImage()
-            => GetProcess()?.CaptureWindow();
+        private static RecordData _lastImage = new RecordData
+        {
+            Image = null,
+            Time = DateTime.MinValue,
+        };
 
+        public static Bitmap GetImage(bool force = true)
+        {
+            try
+            {
+                if (force || DateTime.Now.Subtract(_lastImage.Time) > TimeSpan.FromMilliseconds(300))
+                {
+                    var image = GetImageImpl();
+                    return image;
+                }
+                return _lastImage.Image;
+            }
+            catch
+            {
+                return GetImageImpl();
+            }
+        }
+
+        private static Bitmap GetImageImpl()
+        {
+            var image = GetProcess()?.CaptureWindow();
+            _lastImage = new RecordData
+            {
+                Image = image,
+                Time = DateTime.Now,
+            };
+            return image;
+        }
     }
 }
