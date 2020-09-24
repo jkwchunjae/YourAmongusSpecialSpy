@@ -96,7 +96,8 @@ namespace YourAmongusSpecialSpy
 
         private void GifTestTimer_Tick(object sender, EventArgs e)
         {
-            pictureBox1.Image = _prevAmongusImage[_imageIndex].Image;
+            var index = Math.Max(0, Math.Min(_prevAmongusImage.Count - 1, _imageIndex));
+            pictureBox1.Image = _prevAmongusImage[index].Image;
 
             if (_imageIndex >= _endIndex)
             {
