@@ -98,7 +98,7 @@
             // 
             this.Delay.Location = new System.Drawing.Point(344, 12);
             this.Delay.Maximum = new decimal(new int[] {
-            200,
+            1000,
             0,
             0,
             0});
