@@ -50,6 +50,17 @@
   <ItemGroup>
     <Compile Include="Amongus.cs" />
     <Compile Include="AmongusRecorder.cs" />
+    <Compile Include="AnimatedGif\AnimatedGif.cs" />
+    <Compile Include="AnimatedGif\AnimatedGifCreator.cs" />
+    <Compile Include="AnimatedGif\Extensions.cs" />
+    <Compile Include="AnimatedGif\GifClass.cs" />
+    <Compile Include="AnimatedGif\GifProperties.cs" />
+    <Compile Include="AnimatedGif\GrayscaleQuantizer.cs" />
+    <Compile Include="AnimatedGif\Helper.cs" />
+    <Compile Include="AnimatedGif\OctreeQuantizer.cs" />
+    <Compile Include="AnimatedGif\PaletteQuantizer.cs" />
+    <Compile Include="AnimatedGif\Quantizer.cs" />
+    <Compile Include="AnimatedGif\VideoEncoder.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,12 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AnimatedGif\AnimatedGif.csproj">
-      <Project>{60d8c094-7765-4b0c-bc5f-0956c5f7b419}</Project>
-      <Name>AnimatedGif</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
