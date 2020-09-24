@@ -19,16 +19,24 @@ namespace YourAmongusSpecialSpy
         private delegate void ResizeFormDelegate(int width, int height);
         AmongusRecorder _recorder;
         List<RecordData> _prevAmongusImage;
-        GifManager _gifManager;
+
+        const int CaptureDelay = 50; // ms
+
+        private int _beginIndex;
+        private int _endIndex;
+        private int _imageIndex;
 
         public Form1()
         {
             InitializeComponent();
+            Delay.Value = CaptureDelay;
+            GifTestTimer.Tick += GifTestTimer_Tick;
 
             _recorder = new AmongusRecorder();
             _recorder.OnStop += (s, data) =>
             {
-                ImageTrackBar.Maximum = data.Count;
+                ImageBeginIndex.Maximum = data.Count - 1;
+                ImageEndIndex.Maximum = data.Count - 1;
                 _prevAmongusImage = data;
             };
 
@@ -39,7 +47,7 @@ namespace YourAmongusSpecialSpy
         {
             Start.Enabled = false;
             Stop.Enabled = true;
-            _recorder.Start(TimeSpan.FromMilliseconds(100));
+            _recorder.Start(TimeSpan.FromMilliseconds(CaptureDelay));
         }
 
         private void Stop_Click(object sender, EventArgs e)
@@ -67,21 +75,46 @@ namespace YourAmongusSpecialSpy
         {
             try
             {
-                pictureBox1.Image = _prevAmongusImage[ImageTrackBar.Value].Image;
+                var trackBar = (TrackBar)sender;
+                pictureBox1.Image = _prevAmongusImage[trackBar.Value].Image;
             }
             catch
             { }
         }
 
-        private void GifStart_Click(object sender, EventArgs e)
+        private void TestGifButton_Click(object sender, EventArgs e)
         {
-            _gifManager = new GifManager();
-            _gifManager.Init(_prevAmongusImage, ImageTrackBar.Value);
+            GifTestTimer.Stop();
+
+            GifTestTimer.Interval = (int)Delay.Value;
+            _beginIndex = ImageBeginIndex.Value;
+            _endIndex = ImageEndIndex.Value;
+            _imageIndex = _beginIndex;
+
+            GifTestTimer.Start();
         }
 
-        private void GifEnd_Click(object sender, EventArgs e)
+        private void GifTestTimer_Tick(object sender, EventArgs e)
         {
-            _gifManager?.Complete(ImageTrackBar.Value);
+            pictureBox1.Image = _prevAmongusImage[_imageIndex].Image;
+
+            if (_imageIndex >= _endIndex)
+            {
+                GifTestTimer.Stop();
+            }
+            _imageIndex++;
+        }
+
+        private void CreateGifButton_Click(object sender, EventArgs e)
+        {
+            var imageData = _prevAmongusImage
+                .Select((x, i) => new { Data = x, Index = i })
+                .Where(x => x.Index >= ImageBeginIndex.Value)
+                .Where(x => x.Index <= ImageEndIndex.Value)
+                .Select(x => x.Data)
+                .ToList();
+
+            GifManager.CreateGif(imageData, (int)Delay.Value);
         }
     }
 }

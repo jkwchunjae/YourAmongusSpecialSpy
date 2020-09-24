@@ -58,6 +58,7 @@
     </Compile>
     <Compile Include="GifManager.cs" />
     <Compile Include="ImageExtensions.cs" />
+    <Compile Include="MissionManager.cs" />
     <Compile Include="ProcessExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +86,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AnimatedGif\AnimatedGif.csproj">
+      <Project>{60d8c094-7765-4b0c-bc5f-0956c5f7b419}</Project>
+      <Name>AnimatedGif</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
