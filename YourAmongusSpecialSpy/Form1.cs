@@ -37,6 +37,8 @@ namespace YourAmongusSpecialSpy
             {
                 ImageBeginIndex.Maximum = data.Count - 1;
                 ImageEndIndex.Maximum = data.Count - 1;
+                ImageBeginIndex.Value = 1;
+                ImageEndIndex.Value = 1;
                 _prevAmongusImage = data;
             };
 
