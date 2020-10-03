@@ -92,6 +92,7 @@
     <Compile Include="GifManager.cs" />
     <Compile Include="ImageExtensions.cs" />
     <Compile Include="MissionManager.cs" />
+    <Compile Include="Mission\IMission.cs" />
     <Compile Include="ProcessExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

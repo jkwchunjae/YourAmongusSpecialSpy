@@ -18,9 +18,10 @@ namespace YourAmongusSpecialSpy
     {
         private delegate void ResizeFormDelegate(int width, int height);
         AmongusRecorder _recorder;
+        MissionManager _missionManager;
         List<RecordData> _prevAmongusImage;
 
-        const int CaptureDelay = 50; // ms
+        readonly TimeSpan CaptureDelay = TimeSpan.FromMilliseconds(50);
 
         private int _beginIndex;
         private int _endIndex;
@@ -29,7 +30,7 @@ namespace YourAmongusSpecialSpy
         public Form1()
         {
             InitializeComponent();
-            Delay.Value = CaptureDelay;
+            Delay.Value = (int)CaptureDelay.TotalMilliseconds;
             GifTestTimer.Tick += GifTestTimer_Tick;
 
             _recorder = new AmongusRecorder();
@@ -37,9 +38,26 @@ namespace YourAmongusSpecialSpy
             {
                 ImageBeginIndex.Maximum = data.Count - 1;
                 ImageEndIndex.Maximum = data.Count - 1;
-                ImageBeginIndex.Value = 1;
-                ImageEndIndex.Value = 1;
                 _prevAmongusImage = data;
+            };
+
+            _missionManager = new MissionManager();
+            _missionManager.OnFindMission += (s, mission) =>
+            {
+                if (this.InvokeRequired)
+                {
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        if (mission != null)
+                        {
+                            this.Text = $"미션 중: {mission.GetName()}";
+                        }
+                        else
+                        {
+                            this.Text = "Play";
+                        }
+                    }));
+                }
             };
 
             Stop_Click(null, null);
@@ -49,7 +67,8 @@ namespace YourAmongusSpecialSpy
         {
             Start.Enabled = false;
             Stop.Enabled = true;
-            _recorder.Start(TimeSpan.FromMilliseconds(CaptureDelay));
+            _recorder.Start(CaptureDelay);
+            _missionManager.Run(TimeSpan.FromMilliseconds(500));
         }
 
         private void Stop_Click(object sender, EventArgs e)
@@ -57,6 +76,7 @@ namespace YourAmongusSpecialSpy
             Start.Enabled = true;
             Stop.Enabled = false;
             _recorder.Stop();
+            _missionManager.Stop();
         }
 
         private void Run_Click(object sender, EventArgs e)
@@ -118,6 +138,11 @@ namespace YourAmongusSpecialSpy
                 .ToList();
 
             GifManager.CreateGif(imageData, (int)Delay.Value);
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Stop_Click(null, null);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace YourAmongusSpecialSpy
 {
     public static class Amongus
     {
-        private static Process GetProcess()
+        public static Process GetProcess()
             => Process.GetProcessesByName("Among Us")
                 .FirstOrDefault(x => x.MainWindowTitle == "Among Us");
 
