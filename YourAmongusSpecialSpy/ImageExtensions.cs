@@ -35,5 +35,21 @@ namespace YourAmongusSpecialSpy
 
             return destImage;
         }
+
+        public static Bitmap Cut(this Image img, Rectangle rect)
+        {
+            return img.Cut(rect.X, rect.Y, rect.Width, rect.Height);
+        }
+
+        public static Bitmap Cut(this Image img, int x, int y, int width, int height)
+        {
+            var newBitmap = new Bitmap(width, height);
+            var g = Graphics.FromImage(newBitmap);
+            var dest = new RectangleF(0, 0, width, height);
+            var src = new RectangleF(x, y, width, height);
+            g.DrawImage(img, dest, src, GraphicsUnit.Pixel);
+            g.Dispose();
+            return newBitmap;
+        }
     }
 }

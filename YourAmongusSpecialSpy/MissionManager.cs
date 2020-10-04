@@ -18,6 +18,7 @@ namespace YourAmongusSpecialSpy
         public MissionManager()
         {
             _missions.Add(new FixWiringMission());
+            _missions.Add(new UnlockManifoldsMission());
         }
 
         public void Run(TimeSpan interval)
