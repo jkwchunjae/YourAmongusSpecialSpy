@@ -38,7 +38,7 @@ namespace YourAmongusSpecialSpy.Mission
             for (var x = 400; x <= 1030; x+= 30)
             {
                 MouseController.Move(x, 330);
-                Thread.Sleep(50);
+                Thread.Sleep(60);
             }
             Thread.Sleep(50);
             MouseController.LeftUp(new Point(1020, 330));
