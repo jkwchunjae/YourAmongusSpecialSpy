@@ -95,7 +95,7 @@ namespace YourAmongusSpecialSpy.Mission
         public int Number { get; set; }
         public List<int> BlackCount { get; set; }
 
-        private static string NumberModelText = @"
+        private static readonly string NumberModelText = @"
 0,53,0,0,0,49,0,0,0,46,4,0,7,89,52,5 
 0,61,46,0,0,0,57,0,0,36,31,0,6,82,54,5 
 0,40,45,0,0,26,78,0,0,0,30,21,7,61,60,1 
@@ -111,16 +111,15 @@ namespace YourAmongusSpecialSpy.Mission
         public static List<NumberModel> MakeNumberModelList()
         {
             return NumberModelText.Trim().Replace("\r", "").Split('\n')
-                .Select((x, i) => new { Text = x.Trim(), Number = i + 1 })
-                .Select(x => new NumberModel
+                .Select((x, i) => new NumberModel
                 {
-                    Number = x.Number,
-                    BlackCount = x.Text.Split(',').Select(e => int.Parse(e)).ToList(),
+                    Number = i + 1,
+                    BlackCount = x.Trim().Split(',').Select(e => int.Parse(e.Trim())).ToList(),
                 })
                 .ToList();
         }
 
-        public static List<int> GetImageNumberCount(Bitmap image)
+        private static List<int> GetImageNumberCount(Bitmap image)
         {
             var numberCount = new List<int>();
             for (int row = 0; row < 4; row++)
