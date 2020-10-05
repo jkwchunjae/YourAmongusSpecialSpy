@@ -20,6 +20,7 @@ namespace YourAmongusSpecialSpy
             _missions.Add(new FixWiringMission());
             _missions.Add(new UnlockManifoldsMission());
             _missions.Add(new SwipeCardMission());
+            _missions.Add(new UploadDownloadDataMission());
         }
 
         public void Run(TimeSpan interval)

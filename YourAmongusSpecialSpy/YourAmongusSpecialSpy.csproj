@@ -97,6 +97,7 @@
     <Compile Include="Mission\FixWiringMission.cs" />
     <Compile Include="Mission\IMission.cs" />
     <Compile Include="Mission\UnlockManifoldsMission.cs" />
+    <Compile Include="Mission\UploadDownloadDataMission.cs" />
     <Compile Include="MouseController.cs" />
     <Compile Include="ProcessExtensions.cs" />
     <Compile Include="Program.cs" />
