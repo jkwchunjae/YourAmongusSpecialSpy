@@ -38,11 +38,19 @@ namespace YourAmongusSpecialSpy.Mission
                 image.GetPixel(977, 288),
             };
 
+            var mapping = new List<(Point Point, Color Color)>
+            {
+                (new Point(444, 333), Color.FromArgb(142, 161, 208)),
+                (new Point(666, 333), Color.FromArgb(142, 161, 208)),
+                (new Point(877, 333), Color.FromArgb(142, 161, 208)),
+            };
+
             return points.All(x =>
                    x.R >= 169 && x.R <= 175
                 && x.G >= 169 && x.G <= 175
                 && x.B >= 169 && x.B <= 175
-            );
+            )
+                && mapping.All(x => image.GetPixel(x.Point.X, x.Point.Y) == x.Color);
         }
 
         public void StartMission(Bitmap image)
