@@ -66,9 +66,9 @@ namespace YourAmongusSpecialSpy.Mission
                 .ForEach(data =>
                 {
                     var point = _leftTop[data.Index];
-                    MouseController.Move(point.X + 10, point.Y + 10);
+                    MouseController.Move(point.X + 50, point.Y + 50);
                     Thread.Sleep(TimeSpan.FromMilliseconds(50));
-                    MouseController.Click(point.X + 10, point.Y + 10);
+                    MouseController.Click();
                     Thread.Sleep(TimeSpan.FromMilliseconds(50));
                 });
 
@@ -104,16 +104,16 @@ namespace YourAmongusSpecialSpy.Mission
         public List<int> BlackCount { get; set; }
 
         private static readonly string NumberModelText = @"
-0,53,0,0,0,49,0,0,0,46,4,0,7,89,52,5 
-0,61,46,0,0,0,57,0,0,36,31,0,6,82,54,5 
-0,40,45,0,0,26,78,0,0,0,30,21,7,61,60,1 
-12,31,25,0,3,85,80,1,8,22,58,3,0,0,34,0 
-0,74,48,0,3,82,45,0,11,5,31,20,2,57,52,0 
-0,44,14,0,11,76,28,0,35,39,41,18,3,58,58,4 
-7,54,76,6,0,0,58,0,0,26,26,0,0,26,6,0 
-0,63,51,0,0,80,63,0,20,44,57,11,7,56,56,5 
-0,57,66,0,0,75,95,0,0,0,49,0,0,0,31,0 
-0,59,74,3,0,58,68,33,0,52,60,40,15,79,66,15 
+0,0,2,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,1,2,0,0,0,0,2,2,2,1,0 
+0,1,2,2,0,0,0,1,0,2,0,0,0,0,0,2,0,0,0,0,1,1,0,0,0,1,2,1,1,0,0,2,2,2,1,0 
+0,1,2,2,0,0,0,0,0,2,0,0,0,0,2,2,1,0,0,0,0,0,2,0,0,2,0,1,2,0,0,1,2,2,1,0 
+0,1,1,1,0,0,0,2,1,1,0,0,0,2,2,2,1,0,0,1,0,1,1,0,0,0,0,1,0,0,0,0,0,1,0,0 
+0,2,2,2,1,0,0,2,0,0,0,0,0,2,2,2,1,0,0,1,0,0,2,0,0,2,1,1,2,0,0,1,2,2,0,0 
+0,0,2,1,0,0,0,2,1,0,0,0,0,2,2,2,1,0,0,2,0,1,2,0,0,2,1,1,2,0,0,1,2,2,1,0 
+0,2,2,2,2,0,0,0,1,2,1,0,0,0,1,2,0,0,0,0,1,1,0,0,0,0,2,0,0,0,0,0,1,0,0,0 
+0,1,2,2,0,0,0,2,1,2,0,0,0,1,2,2,0,0,0,2,1,2,2,0,0,2,0,1,2,0,0,1,2,2,1,0 
+0,1,2,2,1,0,0,2,0,1,2,0,0,1,2,2,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0 
+0,1,1,2,1,0,0,2,2,2,2,0,0,1,2,1,2,0,0,1,2,1,2,0,0,2,1,2,2,0,0,2,2,1,1,0 
 ";
 
         public static List<NumberModel> MakeNumberModelList()
@@ -127,18 +127,22 @@ namespace YourAmongusSpecialSpy.Mission
                 .ToList();
         }
 
-        private static List<int> GetImageNumberCount(Bitmap image)
+        public static List<int> CalcModel(Bitmap image, int splitCount)
         {
-            var numberCount = new List<int>();
-            for (int row = 0; row < 4; row++)
+            var result = new List<int>();
+
+            var widthSplit = SplitNumber(image.Size.Width, splitCount);
+            var heightSplit = SplitNumber(image.Size.Height, splitCount);
+
+            for (int row = 0; row < splitCount; row++)
             {
-                for (int column = 0; column < 4; column++)
+                for (var column = 0; column < splitCount; column++)
                 {
                     var count = 0;
-                    var beginPoint = new Point(column * 14, row * 14);
-                    for (var dx = 0; dx < 14; dx++)
+                    var beginPoint = new Point(widthSplit.Take(column).Sum(), heightSplit.Take(row).Sum());
+                    for (var dx = 0; dx < widthSplit[column]; dx++)
                     {
-                        for (var dy = 0; dy < 14; dy++)
+                        for (var dy = 0; dy < heightSplit[row]; dy++)
                         {
                             var x = beginPoint.X + dx;
                             var y = beginPoint.Y + dy;
@@ -147,16 +151,31 @@ namespace YourAmongusSpecialSpy.Mission
                             {
                                 count++;
                             }
+                            else
+                            {
+                            }
                         }
                     }
 
-                    numberCount.Add(count);
+                    result.Add(count);
                 }
             }
 
-            return numberCount;
+            return result.Select(x => x == 0 ? 0 : x < 20 ? 1 : 2).ToList();
         }
 
+        static List<int> SplitNumber(int number, int splitCount)
+        {
+            return Enumerable.Range(0, splitCount)
+                .Select(x =>
+                {
+                    if (x < (number % splitCount))
+                        return number / splitCount + 1;
+                    else
+                        return number / splitCount;
+                })
+                .ToList();
+        }
         private static bool IsNumberColor(Color color)
         {
             if (color.B > 60 && color.R < 100 && color.G < 100)
@@ -167,24 +186,14 @@ namespace YourAmongusSpecialSpy.Mission
 
         private int CheckSimilarity(List<int> blackCounts)
         {
-            var pair = BlackCount
+            return BlackCount
                 .Select((x, i) => new { Model = x, Image = blackCounts[i] })
-                .ToList();
-
-            var same = pair
-                .Select(x => new
-                {
-                    Model = x.Model == 0 ? 0 : x.Model < 20 ? 1 : 2,
-                    Image = x.Image == 0 ? 0 : x.Image < 20 ? 1 : 2,
-                })
                 .Count(x => x.Model == x.Image);
-
-            return same;
         }
 
         public int CheckSimilarity(Bitmap image)
         {
-            return CheckSimilarity(GetImageNumberCount(image));
+            return CheckSimilarity(CalcModel(image, 6));
         }
     }
 }

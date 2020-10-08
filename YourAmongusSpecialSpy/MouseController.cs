@@ -36,6 +36,12 @@ namespace YourAmongusSpecialSpy
             mouse_event((uint)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
         }
 
+        public static void Click()
+        {
+            mouse_event((uint)(MouseEventFlags.LEFTDOWN), 0, 0, 0, 0);
+            mouse_event((uint)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
+        }
+
         public static void LeftDown(Point point)
         {
             Move(point);
