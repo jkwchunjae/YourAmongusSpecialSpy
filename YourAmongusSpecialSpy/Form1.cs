@@ -86,11 +86,12 @@ namespace YourAmongusSpecialSpy
 
         private void Capture_Click(object sender, EventArgs e)
         {
-            var dir = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads\\amongus-captures"));
+            var dir = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads\\amongus-captures\\missions"));
             if (!dir.Exists)
                 Directory.CreateDirectory(dir.FullName);
 
-            Amongus.GetImage().Save(Path.Combine(dir.FullName, $"{Guid.NewGuid()}.bmp"), ImageFormat.Bmp);
+            Amongus.GetImage().Save(Path.Combine(dir.FullName, $"png\\{Guid.NewGuid()}.png"), ImageFormat.Png);
+            Amongus.GetImage().Save(Path.Combine(dir.FullName, $"bmp\\{Guid.NewGuid()}.bmp"), ImageFormat.Bmp);
         }
 
         private void ImageTrackBar_Scroll(object sender, EventArgs e)
