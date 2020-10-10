@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace YourAmongusSpecialSpy
@@ -28,12 +29,18 @@ namespace YourAmongusSpecialSpy
             Move(point.X, point.Y);
         }
 
-        public static void Click(int x, int y)
+        public static void Click(int x, int y, int sleepMilliseconds = 0)
         {
             Move(x, y);
 
+            if (sleepMilliseconds > 0)
+                Thread.Sleep(sleepMilliseconds);
+
             mouse_event((uint)(MouseEventFlags.LEFTDOWN), 0, 0, 0, 0);
             mouse_event((uint)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
+
+            if (sleepMilliseconds > 0)
+                Thread.Sleep(sleepMilliseconds);
         }
 
         public static void Click()

@@ -21,6 +21,7 @@ namespace YourAmongusSpecialSpy
             _missions.Add(new UnlockManifoldsMission());
             _missions.Add(new SwipeCardMission());
             _missions.Add(new UploadDownloadDataMission());
+            _missions.Add(new StartReactorMission());
         }
 
         public void Run(TimeSpan interval)

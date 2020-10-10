@@ -93,6 +93,7 @@
     <Compile Include="GifManager.cs" />
     <Compile Include="ImageExtensions.cs" />
     <Compile Include="MissionManager.cs" />
+    <Compile Include="Mission\StartReactorMission.cs" />
     <Compile Include="Mission\SwipeCardMission.cs" />
     <Compile Include="Mission\FixWiringMission.cs" />
     <Compile Include="Mission\IMission.cs" />
