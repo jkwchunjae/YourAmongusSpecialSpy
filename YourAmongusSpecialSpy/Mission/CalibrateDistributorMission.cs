@@ -56,7 +56,7 @@ namespace YourAmongusSpecialSpy.Mission
                     if (image.GetPixel(p.Status.X, p.Status.Y) != Color.FromArgb(0, 0, 0))
                     {
                         MouseController.Click();
-                        Thread.Sleep(100);
+                        Thread.Sleep(20);
                         break;
                     }
                     Thread.Sleep(20);
