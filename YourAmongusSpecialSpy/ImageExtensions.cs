@@ -11,6 +11,11 @@ namespace YourAmongusSpecialSpy
 {
     public static class ImageExtensions
     {
+        public static Bitmap ResizeImage(this Image image, double ratio)
+        {
+            return image.ResizeImage((int)(image.Width * ratio), (int)(image.Height * ratio));
+        }
+
         public static Bitmap ResizeImage(this Image image, int width, int height)
         {
             var destRect = new Rectangle(0, 0, width, height);
