@@ -29,6 +29,7 @@ namespace YourAmongusSpecialSpy
             _missions.Add(new DivertPowerMission());
             _missions.Add(new AcceptDivertedPowerMission());
             _missions.Add(new EmptyGarbageMission());
+            _missions.Add(new StabilizeSteeringMission());
         }
 
         public void Run(TimeSpan interval)

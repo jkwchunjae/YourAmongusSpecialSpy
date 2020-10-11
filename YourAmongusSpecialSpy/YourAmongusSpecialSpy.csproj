@@ -100,6 +100,7 @@
     <Compile Include="Mission\DivertPowerMission.cs" />
     <Compile Include="Mission\EmptyGarbageMission.cs" />
     <Compile Include="Mission\PrimeShieldsMission.cs" />
+    <Compile Include="Mission\StabilizeSteeringMission.cs" />
     <Compile Include="Mission\StartReactorMission.cs" />
     <Compile Include="Mission\SwipeCardMission.cs" />
     <Compile Include="Mission\FixWiringMission.cs" />
