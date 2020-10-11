@@ -25,6 +25,7 @@ namespace YourAmongusSpecialSpy
             _missions.Add(new CalibrateDistributorMission());
             _missions.Add(new CleanO2FilterMission());
             _missions.Add(new ClearAsteroidsMission());
+            _missions.Add(new PrimeShieldsMission());
         }
 
         public void Run(TimeSpan interval)
