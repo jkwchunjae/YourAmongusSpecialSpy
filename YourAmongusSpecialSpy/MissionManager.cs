@@ -28,6 +28,7 @@ namespace YourAmongusSpecialSpy
             _missions.Add(new PrimeShieldsMission());
             _missions.Add(new DivertPowerMission());
             _missions.Add(new AcceptDivertedPowerMission());
+            _missions.Add(new EmptyGarbageMission());
         }
 
         public void Run(TimeSpan interval)
