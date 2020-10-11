@@ -94,6 +94,7 @@
     <Compile Include="ImageExtensions.cs" />
     <Compile Include="MissionManager.cs" />
     <Compile Include="Mission\CalibrateDistributorMission.cs" />
+    <Compile Include="Mission\CleanO2FilterMission.cs" />
     <Compile Include="Mission\StartReactorMission.cs" />
     <Compile Include="Mission\SwipeCardMission.cs" />
     <Compile Include="Mission\FixWiringMission.cs" />

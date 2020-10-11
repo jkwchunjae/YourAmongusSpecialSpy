@@ -23,6 +23,7 @@ namespace YourAmongusSpecialSpy
             _missions.Add(new UploadDownloadDataMission());
             _missions.Add(new StartReactorMission());
             _missions.Add(new CalibrateDistributorMission());
+            _missions.Add(new CleanO2FilterMission());
         }
 
         public void Run(TimeSpan interval)

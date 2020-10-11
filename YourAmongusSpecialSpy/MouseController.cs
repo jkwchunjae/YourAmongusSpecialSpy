@@ -49,18 +49,30 @@ namespace YourAmongusSpecialSpy
             mouse_event((uint)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
         }
 
-        public static void LeftDown(Point point)
+        public static void LeftDown(Point point, int sleepMilliseconds = 0)
         {
             Move(point);
+
+            if (sleepMilliseconds > 0)
+                Thread.Sleep(sleepMilliseconds);
 
             mouse_event((uint)(MouseEventFlags.LEFTDOWN), 0, 0, 0, 0);
+
+            if (sleepMilliseconds > 0)
+                Thread.Sleep(sleepMilliseconds);
         }
 
-        public static void LeftUp(Point point)
+        public static void LeftUp(Point point, int sleepMilliseconds = 0)
         {
             Move(point);
 
+            if (sleepMilliseconds > 0)
+                Thread.Sleep(sleepMilliseconds);
+
             mouse_event((uint)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
+
+            if (sleepMilliseconds > 0)
+                Thread.Sleep(sleepMilliseconds);
         }
 
         private enum MouseEventFlags
