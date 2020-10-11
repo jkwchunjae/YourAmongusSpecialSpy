@@ -27,6 +27,7 @@ namespace YourAmongusSpecialSpy
             _missions.Add(new ClearAsteroidsMission());
             _missions.Add(new PrimeShieldsMission());
             _missions.Add(new DivertPowerMission());
+            _missions.Add(new AcceptDivertedPowerMission());
         }
 
         public void Run(TimeSpan interval)
