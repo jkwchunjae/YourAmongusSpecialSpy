@@ -95,6 +95,7 @@
     <Compile Include="MissionManager.cs" />
     <Compile Include="Mission\AcceptDivertedPowerMission.cs" />
     <Compile Include="Mission\CalibrateDistributorMission.cs" />
+    <Compile Include="Mission\ChartCourseMission.cs" />
     <Compile Include="Mission\CleanO2FilterMission.cs" />
     <Compile Include="Mission\ClearAsteroidsMission.cs" />
     <Compile Include="Mission\DivertPowerMission.cs" />
