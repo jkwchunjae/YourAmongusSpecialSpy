@@ -42,7 +42,12 @@ namespace YourAmongusSpecialSpy
                 {
                     var image = Amongus.GetImage();
 
-                    var findMissions = _missions.Where(x => x.IsMyMission(image)).ToList();
+                    var findMissions = _missions
+                        .Where(x =>
+                        {
+                            try { return x.IsMyMission(image); }
+                            catch { return false; }
+                        }).ToList();
 
                     if (findMissions.Count == 1)
                     {
