@@ -31,6 +31,7 @@ namespace YourAmongusSpecialSpy
             _missions.Add(new EmptyGarbageMission());
             _missions.Add(new StabilizeSteeringMission());
             _missions.Add(new ChartCourseMission());
+            _missions.Add(new AlignEngineOutputMission());
         }
 
         public void Run(TimeSpan interval)

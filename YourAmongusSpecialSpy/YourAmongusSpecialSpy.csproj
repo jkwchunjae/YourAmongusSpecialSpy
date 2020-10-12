@@ -94,6 +94,7 @@
     <Compile Include="ImageExtensions.cs" />
     <Compile Include="MissionManager.cs" />
     <Compile Include="Mission\AcceptDivertedPowerMission.cs" />
+    <Compile Include="Mission\AlignEngineOutputMission.cs" />
     <Compile Include="Mission\CalibrateDistributorMission.cs" />
     <Compile Include="Mission\ChartCourseMission.cs" />
     <Compile Include="Mission\CleanO2FilterMission.cs" />
