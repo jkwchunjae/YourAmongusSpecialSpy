@@ -54,8 +54,14 @@ namespace YourAmongusSpecialSpy.Mission
             .Select((x, i) => new { Point = x, Index = i })
             .ToList();
 
-            var color = Color.FromArgb(168, 16, 16);
-            var power = position.FirstOrDefault(x => image.GetPixel(x.Point.X, x.Point.Y) == color);
+            var color = new List<Color>
+            {
+                Color.FromArgb(168, 16, 16),
+                Color.FromArgb(168, 17, 16),
+                Color.FromArgb(169, 16, 16),
+                Color.FromArgb(169, 17, 16),
+            };
+            var power = position.FirstOrDefault(x => color.Contains(image.GetPixel(x.Point.X, x.Point.Y)));
 
             if (power != null)
             {
