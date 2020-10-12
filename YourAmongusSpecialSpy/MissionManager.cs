@@ -32,6 +32,7 @@ namespace YourAmongusSpecialSpy
             _missions.Add(new StabilizeSteeringMission());
             _missions.Add(new ChartCourseMission());
             _missions.Add(new AlignEngineOutputMission());
+            _missions.Add(new FuelEnginesMission());
         }
 
         public void Run(TimeSpan interval)
