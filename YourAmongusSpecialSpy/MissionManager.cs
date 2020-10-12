@@ -10,10 +10,12 @@ namespace YourAmongusSpecialSpy
 {
     public class MissionManager
     {
-        private List<IMission> _missions = new List<IMission>();
+        private readonly List<IMission> _missions = new List<IMission>();
         private bool _stop = false;
+        private List<string> _enableMissions = new List<string>();
 
-        public event EventHandler<IMission> OnFindMission;
+        public event EventHandler<(IMission Mission, string Message)> OnEvent;
+        public IEnumerable<IMission> Missions => _missions;
 
         public MissionManager()
         {
@@ -35,6 +37,16 @@ namespace YourAmongusSpecialSpy
             _missions.Add(new FuelEnginesMission());
         }
 
+        private List<IMission> GetEnableMissions()
+        {
+            lock (this)
+            {
+                return _missions
+                    .Where(x => _enableMissions.Contains(x.GetName()))
+                    .ToList();
+            }
+        }
+
         public void Run(TimeSpan interval)
         {
             new Thread(new ThreadStart(() =>
@@ -44,7 +56,14 @@ namespace YourAmongusSpecialSpy
                 {
                     var image = Amongus.GetImage();
 
-                    var findMissions = _missions
+                    if (image.Width != 1376 || image.Height != 807)
+                    {
+                        OnEvent?.Invoke(this, (null, "해상도를 맞추세요: 1360 * 768"));
+                        Thread.Sleep(interval);
+                        continue;
+                    }
+
+                    var findMissions = GetEnableMissions()
                         .Where(x =>
                         {
                             try { return x.IsMyMission(image); }
@@ -55,7 +74,7 @@ namespace YourAmongusSpecialSpy
                     {
                         var mission = findMissions.First();
 
-                        OnFindMission?.Invoke(this, mission);
+                        OnEvent?.Invoke(this, (mission, string.Empty));
                         mission.StartMission(image);
                     }
                     else if (findMissions.Count > 1)
@@ -64,7 +83,7 @@ namespace YourAmongusSpecialSpy
                     }
                     else
                     {
-                        OnFindMission?.Invoke(this, null);
+                        OnEvent?.Invoke(this, (null, "Play"));
                     }
 
                     Thread.Sleep(interval);
@@ -75,6 +94,14 @@ namespace YourAmongusSpecialSpy
         public void Stop()
         {
             _stop = true;
+        }
+
+        public void UpdateEnableMission(List<string> missions)
+        {
+            lock (this)
+            {
+                _enableMissions = missions;
+            }
         }
     }
 }

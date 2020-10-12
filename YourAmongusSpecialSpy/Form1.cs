@@ -42,19 +42,20 @@ namespace YourAmongusSpecialSpy
             };
 
             _missionManager = new MissionManager();
-            _missionManager.OnFindMission += (s, mission) =>
+            _missionManager.OnEvent += (s, data) =>
             {
                 if (this.InvokeRequired)
                 {
                     this.BeginInvoke(new Action(() =>
                     {
-                        if (mission != null)
+                        if (data.Mission != null)
                         {
-                            this.Text = $"미션 중: {mission.GetName()}";
+                            this.Text = $"미션 중: {data.Mission.GetName()}";
                         }
-                        else
+
+                        if (!string.IsNullOrWhiteSpace(data.Message))
                         {
-                            this.Text = "Play";
+                            this.Text = data.Message;
                         }
                     }));
                 }
