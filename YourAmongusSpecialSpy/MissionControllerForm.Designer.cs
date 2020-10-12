@@ -30,6 +30,7 @@
         {
             this.Start = new System.Windows.Forms.Button();
             this.Stop = new System.Windows.Forms.Button();
+            this.TestCapture = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Start
@@ -52,11 +53,22 @@
             this.Stop.UseVisualStyleBackColor = true;
             this.Stop.Click += new System.EventHandler(this.Stop_Click);
             // 
+            // TestCapture
+            // 
+            this.TestCapture.Location = new System.Drawing.Point(174, 12);
+            this.TestCapture.Name = "TestCapture";
+            this.TestCapture.Size = new System.Drawing.Size(75, 23);
+            this.TestCapture.TabIndex = 2;
+            this.TestCapture.Text = "Capture";
+            this.TestCapture.UseVisualStyleBackColor = true;
+            this.TestCapture.Click += new System.EventHandler(this.TestCapture_Click);
+            // 
             // MissionControllerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(326, 498);
+            this.Controls.Add(this.TestCapture);
             this.Controls.Add(this.Stop);
             this.Controls.Add(this.Start);
             this.Name = "MissionControllerForm";
@@ -70,5 +82,6 @@
 
         private System.Windows.Forms.Button Start;
         private System.Windows.Forms.Button Stop;
+        private System.Windows.Forms.Button TestCapture;
     }
 }

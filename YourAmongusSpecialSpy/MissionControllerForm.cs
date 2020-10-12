@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -101,6 +102,12 @@ namespace YourAmongusSpecialSpy
             Start.Enabled = true;
             Stop.Enabled = false;
             _missionManager.Stop();
+        }
+
+        private void TestCapture_Click(object sender, EventArgs e)
+        {
+            var image = Amongus.GetImage();
+            image.Save($"{Guid.NewGuid()}.bmp", ImageFormat.Bmp);
         }
     }
 }
